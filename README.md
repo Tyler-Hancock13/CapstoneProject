@@ -1,6 +1,6 @@
 # CapstoneProject
 
-This was the final project created for the Software & Web Development program at New Brunswick Community College in Spring 2020.
+This was the final project created for the Software & Web Development program at New Brunswick Community College in Spring 2020. My contributions to the project include creating documents and implementing features for creating and processing purchase orders.
 
 ## Description
 
