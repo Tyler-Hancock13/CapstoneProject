@@ -1,0 +1,97 @@
+GET http://localhost:44349/api/employees/search/doe
+
+###
+
+GET http://localhost:44349/api/employees/00000001
+
+###
+
+POST http://localhost:44349/api/authentication/login
+Content-Type: application/json
+
+{
+    "id": 1,
+    "employeeID": "00000001",
+    "password": "password",
+    "role": null
+}
+
+###
+
+POST http://localhost:44349/api/authentication/login
+Content-Type: application/json
+
+{
+    "id": 1,
+    "employeeID": "00000001",
+    "password": "wrongpassword",
+    "role": null
+}
+
+###
+
+GET https://localhost:44349/api/purchaseorders/
+
+###
+
+GET https://localhost:44349/api/purchaseorders/2/order
+
+###
+GET https://localhost:44349/api/purchaseorders/searchByPONumber/1
+
+###
+GET https://localhost:44349/api/purchaseorders/search/2020-04-22/2020-04-24
+
+###
+DELETE https://localhost:44349/api/purchaseorders/order/1
+
+###
+POST https://localhost:44349/api/purchaseorders/order/create
+Content-Type: application/json
+
+{
+    "name": "Printing Paper",
+    "description": "Regular size",
+    "justification": "Printer ran out",
+    "location": "Staples",
+    "quantity": 3,
+    "price": 11.99,
+    "subtotal": 34.02,
+    "poNumber": 1,
+    "status": 1
+}
+
+###
+POST https://localhost:44349/api/purchaseorders/1/order/edit/2
+Content-Type: application/json
+
+{
+    "id": 10,
+    "name": "Printing Paper",
+    "description": "Regular size",
+    "justification": "Printer ran out",
+    "location": "Staples",
+    "quantity": 3,
+    "price": 11.99,
+    "subtotal": 34.99,
+    "poNumber": 2,
+    "status": 1
+}
+
+###
+GET https://localhost:44349/api/purchaseorders/2/order/edit/10
+###
+
+GET https://localhost:44349/api/purchaseorders/process/1
+
+###
+
+GET http://localhost:44349/api/departments
+
+###
+
+GET http://localhost:44349/api/employees
+
+###
+
+GET http://localhost:44349/api/employees/department/1

@@ -1,0 +1,71 @@
+:host {
+  transition: transform 200ms ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1em 0 1em 0;
+}
+
+:host:hover {
+  transform: scale(1.025);
+  cursor: pointer;
+}
+
+.row {
+  width: 95%;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.row h1:first-child {
+  font-weight: 600;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+@media only screen and (min-width: 1201px) {
+  :host {
+    width: 49%;
+    height: 10em;
+    margin-right: 2%;
+  }
+
+  :host:nth-child(2n + 2) {
+    margin-right: 0 !important;
+    margin-bottom: 2%;
+  }
+
+  :host:last-child {
+    margin-bottom: 2%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  :host {
+    width: 100%;
+    height: 10em;
+    margin-bottom: 4%;
+  }
+}
+
+@media only screen and (max-width: 500px) and (min-width: 401px) {
+  h1 {
+    font-size: 2em !important;
+  }
+}
+
+@media only screen and (max-width: 400px) and (min-width: 351px) {
+  h1 {
+    font-size: 1.75em !important;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  h1 {
+    font-size: 1.5em !important;
+  }
+}

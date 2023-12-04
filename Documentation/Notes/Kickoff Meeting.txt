@@ -1,0 +1,8 @@
+Partners Must be present for client walkthroughs.
+
+REST API must be made for supporting employee search for android app but the app doesn't yet need to be coded. Android app only needs to be built in E2.
+
+ERD, Class Diagram, and Iteration Plans required before coding, each iteration.
+
+
+

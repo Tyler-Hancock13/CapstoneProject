@@ -1,0 +1,120 @@
+<h1>{{this.title}}</h1>
+<h5><strong>{{this.subtitle}}</strong><strong [ngSwitch]="request.status">
+    <ng-container *ngSwitchCase="1">Pending</ng-container>
+    <ng-container *ngSwitchCase="2">Under Review</ng-container>
+    <ng-container *ngSwitchCase="3">Closed</ng-container>
+</strong></h5>
+
+
+
+<div id="header">
+    <table>
+        <tr>
+            <td>Employee: {{employee.firstName}} {{employee.lastName}}</td>
+            <td style="padding-left:1em;">Department: {{department.name}}</td>
+        </tr>
+        <tr>
+            <td style="padding-left:2.3em;">Date: {{this.currentDate | date :'shortDate'}} </td>
+            <td style="padding-left:1.6em;">Supervisor: {{supervisor.firstName}} {{supervisor.lastName}}</td>
+        </tr>
+    </table>
+
+    <table id="poPrice">
+        <tr>
+            <td><b>Order Subtotal:</b> {{request.subtotal | number : '1.2-2' | currency}}</td>
+            <td style="padding-left:2em;"><b>Order Tax:</b> {{request.salesTax | number : '1.2-2' | currency}}</td>
+        </tr>
+        <tr>
+            <td style="padding-left:27.5px; padding-top:10px;"><b>Order Total:</b> {{request.total | number : '1.2-2' | currency}}</td>
+        </tr>
+    </table>
+</div>
+
+<button id="savePO" class="btn btn-outline-primary" (click)="updateOrder()">Save Purchase Order</button>
+
+<div id="table" *ngIf="purchaseOrderItems" class="card-container">
+    <div id="innerTable">
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Justification</th>
+                <th>Location</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+                <th>Status</th>
+            </tr>
+            <tr *ngFor="let item of purchaseOrderItems">
+                <td scope="row">{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.justification}}</td>
+                <td>{{item.location}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.price | number : '1.2-2' | currency}}</td>
+                <td>{{item.subtotal | number : '1.2-2' | currency}}</td>
+                <td [ngSwitch]="item.status">
+                    <ng-container *ngSwitchCase="1">Pending</ng-container>
+                    <ng-container *ngSwitchCase="2">Approved</ng-container>
+                    <ng-container *ngSwitchCase="3">Denied</ng-container>
+                </td>
+                <td><input type="button" value="Edit" (click)="getItem(item.poNumber, item.id)" class="btn btn-primary"/></td>
+                <td><input type="button" value="Delete"  class="btn btn-danger"/></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<p>{{this.message}}</p>
+
+<div>
+    <form #itemForm="ngForm" (ngSubmit)="onFormSubmit(itemForm)" method="POST">
+        <div *ngIf="item.id">
+            <label>ID:</label><input name="id" #id="ngModel" [(ngModel)]="item.id" class="form-control" readonly/>
+        </div>
+
+        <label>Name:</label>
+        <input type="text" name="name" required #name="ngModel" [(ngModel)]="item.name" class="form-control"/>
+        <i *ngIf="(name?.errors?.required) && itemForm.submitted && !isValidFormSubmitted" class="fas fa-exclamation-circle err"
+            [attr.title]="name?.errors?.required ? 'Name is required' : ''"></i> <br>
+
+        <label>Description:</label>
+        <input type="text" name="description" required #description="ngModel" [(ngModel)]="item.description" class="form-control"/><br>
+        <i *ngIf="(description?.errors?.required) && itemForm.submitted && !isValidFormSubmitted" class="fas fa-exclamation-circle err"
+            [attr.title]="description?.errors?.required ? 'Description is required' : ''"></i>
+
+        <label>Justification:</label>
+        <input type="text" name="justification" required #justification="ngModel" [(ngModel)]="item.justification" class="form-control"/><br>
+        <i *ngIf="(justification?.errors?.required) && itemForm.submitted && !isValidFormSubmitted" class="fas fa-exclamation-circle err"
+            [attr.title]="justification?.errors?.required ? 'Justification is required' : ''"></i>
+
+
+        <label>Location:</label>
+        <input type="text" name="location" required #location="ngModel" [(ngModel)]="item.location" class="form-control"/> <br>
+        <i *ngIf="(location?.errors?.required) && itemForm.submitted && !isValidFormSubmitted" class="fas fa-exclamation-circle err"
+            [attr.title]="location?.errors?.required ? 'Location is required' : ''"></i>
+
+
+        <label>Quantity:</label>
+        <input type="text" name="quantity" required min="1" #quantity="ngModel" [(ngModel)]="item.quantity" class="form-control" (ngModelChange)="calculateSubtotal()"/> <br>
+        <i *ngIf="(quantity?.errors?.required || quantity?.errors?.min) && itemForm.submitted && !isValidFormSubmitted" class="fas fa-exclamation-circle err"
+            [attr.title]="quantity?.errors?.required ? 'Quantity is required' : quantity?.errors?.min ? 'Quantity cannot be less than 0.' : ''"></i>
+
+        <label>Price:</label>
+        <input type="text" name="price" required min="1" #price="ngModel" [(ngModel)]="item.price" class="form-control" (ngModelChange)="calculateSubtotal()"/><br>
+        <i *ngIf="(price?.errors?.required) && itemForm.submitted && !isValidFormSubmitted" class="fas fa-exclamation-circle err"
+            [attr.title]="price?.errors?.required ? 'Price is required' : ''"></i>
+
+        <label>Subtotal:</label>
+        <input type="text" name="subtotal" required min="1" #subtotal="ngModel" [(ngModel)]="item.subtotal" class="form-control" readonly/><br>
+        <i *ngIf="(subtotal?.errors?.required) && itemForm.submitted && !isValidFormSubmitted" class="fas fa-exclamation-circle err"
+            [attr.title]="subtotal?.errors?.required ? 'Subtotal is required' : ''"></i>
+
+        <input type="hidden" name="status" #status="ngModel" [(ngModel)]="item.status">
+        <input type="hidden" name="timestamp" #timestamp="ngModel" [(ngModel)]="item.timestamp">
+
+        <button class="btn btn-primary">Submit</button>
+    </form>
+</div>

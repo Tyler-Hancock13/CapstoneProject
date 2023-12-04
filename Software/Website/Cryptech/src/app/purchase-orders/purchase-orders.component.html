@@ -1,0 +1,57 @@
+<h1 class="text-center mt-4">Purchase Orders</h1>
+
+<div class="container" *ngIf="loading">
+    <img src="../../assets/loading.svg" alt="Loading...">
+</div>
+
+<div class="container" *ngIf="message">
+    <h1>{{ message }}</h1>
+</div>
+
+<div id="searchForm" class="mx-auto mt-4">
+    <label>Start Date:</label><input id="search" type="date" class="form-control" [(ngModel)]="startDate"/> <br>
+    <label>End Date:</label><input id="endDate" type="date" class="form-control" [(ngModel)]="endDate"/>
+    <label>Search by POID</label><input id="search" type="text" class="form-control" [(ngModel)]="searchText">
+</div>
+
+<div>
+<button id="search" class="btn btn-outline-primary" (click)="searchById()"><i id="icon" class="fas fa-search"></i></button>
+</div>
+
+<a ></a>
+
+<div id="create">
+    <a class="btn btn-primary" routerLink="create">Create New Purchase Order</a>
+</div>
+
+<div id="table" *ngIf="purchaseOrders" class="card-container">
+    <div id="innerTable">
+        <table class="table">
+            <tr>
+                <th>PONumber</th>
+                <th>Status</th>
+                <th>Employee</th>
+                <th>Department</th>
+                <th>Subtotal</th>
+                <th>Tax</th>
+                <th>Total</th>
+                <th>Date Created</th>
+            </tr>
+            <tr *ngFor="let purchaseOrder of purchaseOrders">
+                <td>{{purchaseOrder.poNumber}}</td>
+                <td [ngSwitch]="purchaseOrder.status">
+                    <ng-container *ngSwitchCase="1">Pending</ng-container>
+                    <ng-container *ngSwitchCase="2">Under Review</ng-container>
+                    <ng-container *ngSwitchCase="3">Closed</ng-container>
+                </td>
+                <td>{{purchaseOrder.employeeName}}</td>
+                <td>{{purchaseOrder.departmentName}}</td>
+                <td>{{purchaseOrder.subtotal | number : '1.2-2' | currency}}</td>
+                <td>{{purchaseOrder.salesTax | number : '1.2-2' | currency}}</td>
+                <td>{{purchaseOrder.total | number : '1.2-2' | currency}}</td>
+                <th>{{purchaseOrder.dateCreated | date :'short'}}</th>
+                <td><a routerLink="order/{{purchaseOrder.poNumber}}" class="btn btn-primary">View</a></td>      
+            </tr>
+        </table>
+    </div>
+</div>

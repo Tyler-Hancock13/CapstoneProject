@@ -1,0 +1,39 @@
+#searchForm {
+    float:left;
+    width:25%;
+    margin-top:1em;
+}
+
+#table {
+    text-align: center;
+    margin-top:1em;
+    background-color:#FFFFFF;
+    color:#000000;
+    border-radius: 1em;
+}
+
+#search {
+    float:left;
+}
+
+#searchForm {
+    
+}
+
+tr:nth-child(even){
+    background-color:#c9c9c9;
+}
+
+#innerTable {
+    padding-left:1.5em;
+    padding-bottom:0.5em;
+}
+
+#create {
+    margin-top:15em;
+    margin-left:86%;
+}
+
+body{
+    margin-bottom:5em;
+}

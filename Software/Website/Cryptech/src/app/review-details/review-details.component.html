@@ -1,0 +1,26 @@
+<i class="fas fa-times-circle" (click)="goBack()"></i>
+
+<div class="row">
+    <h1>Year:</h1>
+    <h1>{{ year }}</h1>
+</div>
+
+<div class="row">
+    <h1>Quarter:</h1>
+    <h1>{{ quarter }}</h1>
+</div>
+
+<div class="row">
+    <h1>Date:</h1>
+    <h1>{{ review.date | date }}</h1>
+</div>
+
+<div class="row">
+    <h1>Rating:</h1>
+    <h1>{{ rating }}</h1>
+</div>
+
+<div class="row" *ngIf="supervisor">
+    <h1>Supervisor:</h1>
+    <h1>{{ supervisor.fullName }}</h1>
+</div>

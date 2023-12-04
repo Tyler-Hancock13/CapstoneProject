@@ -1,0 +1,11 @@
+<h1 class="text-center mt-4">Pending Reviews</h1>
+
+<div class="container" *ngIf="!employees || employees.length == 0">
+    <h3>You do not have any pending reviews.</h3>
+</div>
+
+<div *ngIf="employees && employees.length > 0" id="employeeContainer" class="mt-4">
+    <app-employee *ngFor="let employee of employees" [employee]="employee"
+        [routerLink]="['/reviews/create', supervisorId, employee.id]">
+    </app-employee>
+</div>

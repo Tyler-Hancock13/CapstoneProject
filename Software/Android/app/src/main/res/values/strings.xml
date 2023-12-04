@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Cryptech</string>
+    <string name="position_label_text">Position:</string>
+    <string name="office_location_label_text">Office Location:</string>
+    <string name="phone_label_text">Phone Number:</string>
+    <string name="email_label_text">Email Address:</string>
+</resources>

@@ -1,0 +1,46 @@
+<h1 class="text-center mt-4" *ngIf="supervisor && !supervisor.middleInitial">{{supervisor.firstName}}
+    {{supervisor.lastName}}</h1>
+<h1 class="text-center mt-4" *ngIf="supervisor && supervisor.middleInitial">{{supervisor.firstName}}
+    {{supervisor.middleInitial}}
+    {{supervisor.lastName}}</h1>
+
+<h3 class="text-center mt-3" *ngIf="success && form.pristine">Review Created Successfully</h3>
+
+<ul *ngIf="(reviewForm.invalid && reviewForm.submitted || review.errors && review.errors.length > 0) && !success"
+    class="alert alert-success mt-4">
+    <li *ngIf="employeeID.errors?.required" class="mx-3">Employee is required.</li>
+    <li *ngIf="rating.errors?.required" class="mx-3">Rating is required.</li>
+    <li *ngIf="date.errors?.required" class="mx-3">Date is required.</li>
+    <li *ngIf="comment.errors?.required" class="mx-3">Comment is required.</li>
+    <li class="mx-3" *ngFor="let error of review.errors">{{ error.message }}</li>
+</ul>
+
+<form [formGroup]="form" #reviewForm="ngForm" class="mt-4" (ngSubmit)="create()">
+    <div class="form-group">
+        <label for="employee">Employee:</label>
+        <select formControlName="employeeID" class="form-control" (change)="formChanged()" id="employee">
+            <option *ngFor="let employee of employees" value="{{employee.id}}">{{employee.fullName}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="rating">Rating:</label>
+        <select formControlName="rating" class="form-control" (change)="formChanged()" id="rating">
+            <option value="0">Below Expecations</option>
+            <option value="1">Meets Expectations</option>
+            <option value="2">Exceeds Expectations</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="date">Date:</label>
+        <input type="date" formControlName="date" class="form-control" (change)="formChanged()" id="date">
+    </div>
+
+    <div class="form-group">
+        <label for="comment">Comment:</label>
+        <textarea formControlName="comment" class="form-control" (change)="formChanged()"></textarea>
+    </div>
+
+    <button class="btn btn-outline-primary">Create</button>
+</form>

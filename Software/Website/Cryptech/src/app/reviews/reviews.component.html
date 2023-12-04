@@ -1,0 +1,11 @@
+<h1 class="text-center mt-4">Reviews</h1>
+
+<div class="container" *ngIf="!reviews || reviews.length == 0">
+    <h3>You do not have any reviews.</h3>
+</div>
+
+<app-review-details *ngIf="selectedReview" [review]="selectedReview" (onBackClicked)="goBack()"></app-review-details>
+
+<div id="reviewContainer" *ngIf="reviews && reviews.length > 0 && !selectedReview" class="mt-4">
+    <app-review *ngFor="let review of reviews" [review]="review" (click)="showDetails(review)"></app-review>
+</div>

@@ -1,0 +1,43 @@
+:host {
+  position: relative;
+}
+
+.fa-times-circle {
+  position: absolute;
+  top: 1.6%;
+  left: 0.5%;
+  cursor: pointer;
+  transition: transform ease-in-out 200ms;
+  font-size: 1.5em;
+}
+
+.fa-times-circle:hover {
+  transform: scale(1.125);
+}
+
+.row {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5em auto 0.5em auto;
+}
+
+hr {
+  border-color: #2a2b5f;
+  width: 95%;
+}
+
+.row h1:first-child {
+  font-weight: 600;
+}
+
+.row:last-child h1,
+.row:last-child h2 {
+  margin-bottom: 0;
+}
+
+@media only screen and (max-width: 700px) {
+  .row {
+    flex-direction: column;
+  }
+}

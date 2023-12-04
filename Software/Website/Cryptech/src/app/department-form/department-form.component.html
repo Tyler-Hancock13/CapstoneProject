@@ -1,0 +1,38 @@
+<h1 class="text-center mt-4">Update Department</h1>
+
+<h3 class="text-center mt-3" *ngIf="success && form.pristine">Department Updated Successfully</h3>
+
+<ul *ngIf="(departmentForm.submitted && departmentForm.invalid || (department && department.errors && department.errors.length > 0)) && !success"
+    class="alert alert-success mt-4">
+    <li *ngIf="id.errors?.required" class="mx-3">Please, select a Department to update.</li>
+    <li class="mx-3" *ngFor="let error of department.errors">{{ error.message }}</li>
+</ul>
+
+<form [formGroup]="form" #departmentForm="ngForm" class="mt-4" (ngSubmit)="update()">
+    <div class="form-group">
+        <label for="department">Department:</label>
+        <select formControlName="id" class="form-control" id="department" (change)="onDepartmentSelected()"
+            [attr.disabled]="employee ? 'disabled' : null">
+            <option *ngFor="let department of departments" value="{{department.id}}">{{department.name}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" formControlName="name" class="form-control" id="name"
+            [attr.disabled]="user.role == 1 ? 'disabled' : null">
+    </div>
+
+    <div class="form-group">
+        <label for="date">Invocation Date:</label>
+        <input type="date" formControlName="invocationDate" class="form-control" id="date"
+            [attr.disabled]="user.role == 1 ? 'disabled' : null">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea formControlName="description" class="form-control"></textarea>
+    </div>
+
+    <button class="btn btn-outline-primary">Update</button>
+</form>

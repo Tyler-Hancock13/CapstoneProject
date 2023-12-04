@@ -1,0 +1,48 @@
+Employee
+	- ID (Unique, System-Assigned, 8-digits)
+	- Password
+
+	Personal Information:
+	- First Name
+	- Last Name
+	- Middle Initial (NULLABLE)
+	- Date of Birth
+	- Street Address
+	- City
+	- Postal Code
+
+	Employment Information:
+	- SIN
+	- Seniority Date
+	- Job Start Date
+	- Job Assignment
+	- Department
+	- Supervisor
+	- Work Phone Number
+	- Cell Phone Number
+	- Email Address	
+
+
+Department 
+	- ID
+	- Name
+	- Description
+	- Invocation Date *Ask about this
+
+Review (All Attributes required)
+	- ID
+	- Employee Name
+	- Date
+	- Performance Rating
+	- Comment
+
+PerformanceRating (enum)
+	- Below Expectations
+	- Meets Expecations
+	- Exceeds Expectations
+
+EmploymentStatus (enum)
+	- Active 
+	- Retired
+	- Terminated
+

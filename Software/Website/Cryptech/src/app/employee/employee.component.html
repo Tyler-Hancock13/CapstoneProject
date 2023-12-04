@@ -1,0 +1,13 @@
+<div class="row">
+    <h1>ID:</h1>
+    <h1>{{ employee.id }}</h1>
+</div>
+
+<div class="row">
+    <h1>Name:</h1>
+    <h1 *ngIf="!employee.middleInitial">{{ employee.firstName }}
+        {{ employee.lastName }}
+    </h1>
+    <h1 *ngIf="employee.middleInitial">{{ employee.firstName }}
+        {{ employee.middleInitial }} {{ employee.lastName }}</h1>
+</div>

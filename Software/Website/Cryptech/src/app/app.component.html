@@ -1,0 +1,81 @@
+<header>
+  <nav class="navbar navbar-expand-xl navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" routerLink="/">
+      <img class="d-inline-block align-self-center" src="../assets/logo.png" alt="Logo" />
+      Cryptech
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">Home</a>
+        </li>
+
+        <li class="nav-item dropdown" routerLinkActive="active" *ngIf="authenticationService.isLoggedIn()">
+          <a class="nav-link dropdown-toggle" href="#" id="reviewsDropdown" data-toggle="dropdown">
+            Reviews
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" [routerLink]="['/reviews/create', authenticationService.globals.user.employeeID]"
+              *ngIf="authenticationService.globals.user.role == 0 || authenticationService.globals.user.role == 1">Create
+              Review</a>
+            <a class="dropdown-item" [routerLink]="['/reviews/pending', authenticationService.globals.user.employeeID]"
+              *ngIf="authenticationService.globals.user.role == 0 || authenticationService.globals.user.role == 1">Pending
+              Reviews</a>
+            <a class="dropdown-item" [routerLink]="['/reviews', authenticationService.globals.user.employeeID]">My
+              Reviews</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown" routerLinkActive="active"
+          *ngIf="authenticationService.isLoggedIn() && (authenticationService.globals.user.role == 0 || authenticationService.globals.user.role == 1 || authenticationService.globals.user.role == 2)">
+          <a class="nav-link dropdown-toggle" href="#" id="departmentsDropdown" data-toggle="dropdown">
+            Departments
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" routerLink="/departments/update">Update Department</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown" routerLinkActive="active" *ngIf="authenticationService.isLoggedIn()">
+          <a class="nav-link dropdown-toggle" href="#" id="employeesDropdown" data-toggle="dropdown">
+            Employees
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" routerLink="/employees">Search Employees</a>
+            <a class="dropdown-item"
+              [routerLink]="['/employees/update', authenticationService.globals.user.employeeID]">Update Personal
+              Info</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown" routerLinkActive="active" *ngIf="authenticationService.isLoggedIn()">
+          <a class="nav-link dropdown-toggle" href="#" id="employeesDropdown" data-toggle="dropdown">
+            Purchase Orders
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item"
+              [routerLink]="['/purchaseorders', authenticationService.globals.user.employeeID]">View All</a>
+            <a class="dropdown-item"
+              [routerLink]="['/purchaseorders/process', authenticationService.globals.user.employeeID]">Process Purchase
+              Order</a>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="authenticationService.isLoggedIn()" (click)="logout()">Log
+            Out</a>
+
+          <a class="nav-link" *ngIf="!authenticationService.isLoggedIn()" routerLink="/login" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">Log In</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+<main class="mx-auto">
+  <router-outlet></router-outlet>
+</main>

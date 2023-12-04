@@ -1,0 +1,24 @@
+<h1 class="text-center mt-4 mb-0">Employees</h1>
+
+<ul class="alert alert-success mt-4 mb-4" *ngIf="message">
+    <li class="mx-3">{{ message }}</li>
+</ul>
+
+<div id="searchForm" class="mx-auto mt-4">
+    <input type="text" class="form-control text-center" placeholder="Search by ID or Last Name" [(ngModel)]="searchText"
+        (keyup.enter)="search()" />
+    <button class="btn btn-outline-primary" (click)="search()">
+        <i class="fas fa-search"></i>
+    </button>
+</div>
+
+<div class="container" *ngIf="loading">
+    <img src="../../assets/loading.svg" alt="Loading..." />
+</div>
+
+<app-employee-details *ngIf="employee" [employee]="employee"></app-employee-details>
+
+<div *ngIf="employees" id="employeeContainer" class="mt-4">
+    <app-employee *ngFor="let employee of employees" [employee]="employee" (click)="showDetails(employee)">
+    </app-employee>
+</div>

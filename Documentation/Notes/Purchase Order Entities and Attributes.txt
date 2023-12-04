@@ -1,0 +1,21 @@
+Purchase Order
+	
+	- Purchase Order Number
+	- Item Name
+	- Description
+	- Quantity
+	- Price
+	- Justification
+	- Location
+	- Order Date
+
+
+Purchase Order Status
+	- Pending
+	- Under Review
+	- Closed
+
+Item Status
+	- Approved
+	- Denied
+	- Pending

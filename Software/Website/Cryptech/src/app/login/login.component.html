@@ -1,0 +1,21 @@
+<h1 class="text-center mt-4">Login</h1>
+
+<ul *ngIf="loginForm.invalid && loginForm.submitted || credentialsInvalid || user.errors && form.pristine"
+  class="alert alert-success mt-4">
+  <li *ngIf="employeeID.errors?.required" class="mx-3">Employee ID is required.</li>
+  <li *ngIf="password.errors?.required" class="mx-3">Password is required.</li>
+  <li *ngIf="credentialsInvalid" class="mx-3">Invalid Credentials.</li>
+  <ng-container *ngIf="form.pristine">
+    <li class="mx-3" *ngFor="let error of user.errors">{{ error.message }}</li>
+  </ng-container>
+</ul>
+
+<form id="formContainer" [formGroup]="form" #loginForm="ngForm" (ngSubmit)="login()">
+  <input type="text" class="form-control" placeholder="Employee ID" formControlName="employeeID"
+    (keyup.backspace)="clearCredentials()" />
+
+  <input type="password" class="form-control" placeholder="Password" formControlName="password"
+    (keyup.backspace)="clearCredentials()" />
+
+  <button class="btn btn-outline-primary">Login</button>
+</form>

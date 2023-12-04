@@ -1,0 +1,35 @@
+.row {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5em auto 0.5em auto;
+}
+
+hr {
+  border-color: #2a2b5f;
+  width: 95%;
+}
+
+#address {
+  display: flex;
+}
+
+#address h3:nth-child(1),
+#address h3:nth-child(2) {
+  margin-right: 0.25em !important;
+}
+
+.row h2,
+.title {
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 700px) {
+  .row {
+    flex-direction: column;
+  }
+
+  #address {
+    flex-direction: column;
+  }
+}

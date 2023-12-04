@@ -1,0 +1,16 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 65vh;
+  margin-bottom: 3em;
+}
+
+button {
+  font-size: 1.5em;
+}
+
+textarea {
+  resize: none;
+  height: 10em;
+}

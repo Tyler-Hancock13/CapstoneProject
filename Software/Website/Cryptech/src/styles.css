@@ -1,0 +1,12 @@
+body {
+    padding-top: 68px;
+    min-height: 100vh;
+    background-image: url("./assets/background.svg");
+    color: #fff !important;
+}
+
+@media only screen and (max-width: 992px) {
+    body {
+        padding-top: 62.2px;
+    }
+}

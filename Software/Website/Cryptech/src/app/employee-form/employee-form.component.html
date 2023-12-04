@@ -1,0 +1,37 @@
+<h1 class="text-center mt-4">Update Personal Info</h1>
+
+<h3 class="text-center mt-3" *ngIf="success && form.pristine">Employee Updated Successfully</h3>
+
+<ul *ngIf="employeeForm.submitted && employee && employee.errors && employee.errors.length > 0 && !success"
+    class="alert alert-success mt-4">
+    <li class="mx-3" *ngFor="let error of employee.errors">{{ error.message }}</li>
+</ul>
+
+<form [formGroup]="form" #employeeForm="ngForm" class="mt-4 mb-4" (ngSubmit)="update()">
+    <div class="form-group">
+        <label for="streetAddress">Street Address:</label>
+        <input type="text" formControlName="streetAddress" class="form-control" id="streetAddress">
+    </div>
+
+    <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" formControlName="city" class="form-control" id="city">
+    </div>
+
+    <div class="form-group">
+        <label for="postalCode">Postal Code:</label>
+        <input type="text" formControlName="postalCode" class="form-control" id="postalCode">
+    </div>
+
+    <div class="form-group">
+        <label for="workPhone">Work Phone:</label>
+        <input type="text" formControlName="workPhone" class="form-control" id="workPhone">
+    </div>
+
+    <div class="form-group">
+        <label for="cellPhone">Cell Phone:</label>
+        <input type="text" formControlName="cellPhone" class="form-control" id="cellPhone">
+    </div>
+
+    <button class="btn btn-outline-primary">Update</button>
+</form>

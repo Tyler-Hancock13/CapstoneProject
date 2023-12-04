@@ -1,0 +1,79 @@
+<h1 class="text-center mt-4">Purchase Order Items</h1>
+
+<div class="container" *ngIf="loading">
+    <img src="../../assets/loading.svg" alt="Loading...">
+</div>
+
+<div class="container" *ngIf="message">
+    <h3>{{ message }}</h3>
+</div>
+<h5><strong>Purchase Order #{{purchaseOrder.poNumber}} - </strong><strong [ngSwitch]="purchaseOrder.status">
+    <ng-container *ngSwitchCase="1">Pending</ng-container>
+    <ng-container *ngSwitchCase="2">Under Review</ng-container>
+    <ng-container *ngSwitchCase="3">Closed</ng-container>
+</strong></h5>
+
+<div id="header">
+    <table>
+        <tr>
+            <td>Employee: {{employee.firstName}} {{employee.lastName}}</td>
+            <td style="padding-left:1em;">Department: {{department.name}}</td>
+        </tr>
+        <tr>
+            <td style="padding-left:2.3em;">Date: {{this.currentDate | date :'shortDate'}} </td>
+            <td style="padding-left:1.6em;">Supervisor: {{supervisor.firstName}} {{supervisor.lastName}}</td>
+        </tr>
+    </table>
+
+    <table id="poPrice">
+        <tr>
+            <td><b>Order Subtotal:</b> {{purchaseOrder.subtotal | number : '1.2-2' | currency}}</td>
+            <td style="padding-left:2em;"><b>Order Tax:</b> {{purchaseOrder.salesTax | number : '1.2-2' | currency}}</td>
+        </tr>
+        <tr>
+            <td style="padding-left:27.5px; padding-top:10px;"><b>Order Total:</b> {{purchaseOrder.total | number : '1.2-2' | currency}}</td>
+        </tr>
+    </table>
+</div>
+
+<div id="create">
+    <a class="btn btn-primary" routerLink="create">Create New Item</a>
+</div>
+
+<button id="savePO" class="btn btn-outline-primary" (click)="updateOrder()">Save Purchase Order</button>
+
+<div id="table" *ngIf="purchaseOrderItems" class="card-container">
+    <div id="innerTable">
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Justification</th>
+                <th>Location</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+                <th>Status</th>
+            </tr>
+            <tr *ngFor="let item of purchaseOrderItems">
+                <td scope="row">{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.justification}}</td>
+                <td>{{item.location}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.price | number : '1.2-2' | currency}}</td>
+                <td>{{item.subtotal | number : '1.2-2' | currency}}</td>
+                <td [ngSwitch]="item.status">
+                    <ng-container *ngSwitchCase="1">Pending</ng-container>
+                    <ng-container *ngSwitchCase="2">Approved</ng-container>
+                    <ng-container *ngSwitchCase="3">Denied</ng-container>
+                </td>
+                <td><a routerLink="edit/{{item.id}}" id="edit" class="btn btn-primary">Edit</a></td>
+                <td><input type="button" value="Delete" (click)="delete(item)" class="btn btn-danger"/></td>
+            </tr>
+        </table>
+    </div>
+</div>
+

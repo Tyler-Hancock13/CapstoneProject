@@ -1,0 +1,33 @@
+<div class="card mt-4 bg-primary text-dark pb-3">
+    <h1 class="text-center mt-4 mb-4 title" *ngIf="!employee.middleInitial">{{ employee.firstName }}
+        {{ employee.lastName }}
+    </h1>
+    <h1 class="text-center mt-4 mb-4 title" *ngIf="employee.middleInitial">{{ employee.firstName }}
+        {{ employee.middleInitial }} {{ employee.lastName }}</h1>
+
+    <hr class="text-dark mt-0 mb-4 mx-auto" />
+
+    <div class="row">
+        <h2>Email:</h2>
+        <h3>{{ employee.emailAddress }}</h3>
+    </div>
+
+    <div class="row">
+        <h2>Address:</h2>
+        <div id="address">
+            <h3>{{ employee.streetAddress }},</h3>
+            <h3>{{ employee.city }},</h3>
+            <h3>{{ employee.postalCode }}</h3>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="employee.workPhone">
+        <h2>Work Phone:</h2>
+        <h3>{{ employee.workPhone }}</h3>
+    </div>
+
+    <div class="row" *ngIf="employee.cellPhone">
+        <h2>Cell Phone:</h2>
+        <h3>{{ employee.cellPhone }}</h3>
+    </div>
+</div>

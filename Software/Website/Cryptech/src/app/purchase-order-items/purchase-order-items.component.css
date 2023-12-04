@@ -1,0 +1,41 @@
+#table {
+    margin-left:2em;
+    text-align: center;
+    margin-top:1em;
+    background-color:#FFFFFF;
+    color:#000000;
+    border-radius: 1em;
+}
+
+#innerTable {
+    padding-left:1.5em;
+    padding-bottom:1em;
+}
+
+#savePO {
+    margin-left:2.5em;
+    margin-top:1.5em;
+}
+
+#edit {
+    margin-left:2em;
+}
+
+#table tr:nth-child(even){
+    background-color:#c9c9c9;
+}
+
+#header {
+    margin-left:2em;
+}
+
+#poPrice {
+    float:right;
+    margin-top:-3em;
+    margin-right:2em;
+}
+
+h5 {
+    margin-left:32px;
+    margin-bottom:2%;
+}
